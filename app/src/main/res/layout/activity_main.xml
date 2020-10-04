@@ -2,17 +2,57 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <fragment
+        android:id="@+id/input_fragment"
+        android:name="edu.arizona.cast.austinramsay.glucosemonitor.InputFragment"
+        android:layout_width="370dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/history_button"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/history_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/output_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clear_button"
+        app:layout_constraintTop_toBottomOf="@+id/input_fragment" />
+
+    <Button
+        android:id="@+id/clear_button"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/clear_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/output_view"
+        app:layout_constraintEnd_toStartOf="@+id/history_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_fragment" />
+
+    <TextView
+        android:id="@+id/output_view"
+        android:layout_width="370dp"
+        android:layout_height="177dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

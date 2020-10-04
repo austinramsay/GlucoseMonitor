@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GlucoseMonitor</string>
+    <string name="input_view_fasting_prompt">Fasting:</string>
+    <string name="input_view_breakfast_prompt">Breakfast:</string>
+    <string name="input_view_lunch_prompt">Lunch:</string>
+    <string name="input_view_dinner_prompt">Dinner:</string>
+    <string name="number_hint">Number</string>
+    <string name="clear_button_text">Clear</string>
+    <string name="history_button_text">History</string>
 </resources>

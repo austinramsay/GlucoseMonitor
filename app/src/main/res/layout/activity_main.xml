@@ -11,7 +11,7 @@
         android:id="@+id/input_fragment"
         android:name="edu.arizona.cast.austinramsay.glucosemonitor.InputFragment"
         android:layout_width="370dp"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:layout_marginTop="25dp"
         android:layout_weight="2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,7 @@
         android:id="@+id/history_button"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="19dp"
         android:text="@string/history_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/output_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/clear_button"
@@ -36,10 +33,7 @@
         android:id="@+id/clear_button"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="19dp"
         android:text="@string/clear_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/output_view"
         app:layout_constraintEnd_toStartOf="@+id/history_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +42,13 @@
     <TextView
         android:id="@+id/output_view"
         android:layout_width="370dp"
-        android:layout_height="177dp"
-        android:layout_marginBottom="150dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clear_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

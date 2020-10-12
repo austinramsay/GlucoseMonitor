@@ -13,13 +13,15 @@
         android:id="@+id/input_date_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textAlignment="center" />
 
     <LinearLayout
         android:id="@+id/fasting_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/tv_fasting"
@@ -50,7 +52,8 @@
         android:id="@+id/breakfast_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/tv_breakfast"
@@ -80,7 +83,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/tv_lunch"
@@ -110,7 +114,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/tv_dinner"
@@ -142,5 +147,6 @@
         android:id="@+id/calculate_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/calculate_button_text" />
 </LinearLayout>

@@ -17,6 +17,11 @@ data class Glucose(val date: LocalDate,
         const val STATUS_NORMAL = "Normal"
         const val STATUS_ABNORMAL = "Abnormal"
         const val STATUS_HYPOGLYCEMIC= "Hypoglycemic"
+
+        fun getRandomGlucoseLevel(): Int {
+            // Return a reasonable glucose level, which would be between 60 and 180
+            return (60..180).random()
+        }
     }
 
     // Upon instance creation, calculate the status properties using the provided glucose numbers

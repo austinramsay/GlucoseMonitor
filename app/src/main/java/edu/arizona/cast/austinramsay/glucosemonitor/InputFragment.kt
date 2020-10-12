@@ -96,11 +96,10 @@ class InputFragment : Fragment(R.layout.input_view) {
             }
         }
 
-        return view
-    }
+        // Sync input field colors to view model
+        syncColors()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        return view
     }
 
     // Sync the input field colors to the view model values

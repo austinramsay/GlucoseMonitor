@@ -12,11 +12,18 @@ data class Glucose(val date: LocalDate,
     val breakfastStatus: String?
     val lunchStatus: String?
     val dinnerStatus: String?
+    val average: Int?
+    val overallStatus: String?
 
     companion object {
         const val STATUS_NORMAL = "Normal"
         const val STATUS_ABNORMAL = "Abnormal"
         const val STATUS_HYPOGLYCEMIC= "Hypoglycemic"
+
+        fun getRandomGlucoseLevel(): Int {
+            // Return a reasonable glucose level, which would be between 60 and 180
+            return (60..180).random()
+        }
     }
 
     // Upon instance creation, calculate the status properties using the provided glucose numbers
@@ -55,6 +62,30 @@ data class Glucose(val date: LocalDate,
         } else {
             STATUS_NORMAL
         }
+
+        // Set the overall average values
+        average = ((fasting + breakfast + lunch + dinner) / 4)
+        overallStatus = if (average < 70) {
+            STATUS_HYPOGLYCEMIC
+        } else if (average > 140) {
+            STATUS_ABNORMAL
+        } else {
+            STATUS_NORMAL
+        }
+    }
+
+    override fun toString(): String {
+        return String.format(
+                "Date: %s\n" +
+                "Fasting: %d\n" +
+                "Breakfast: %d\n" +
+                "Lunch: %d\n" +
+                "Dinner: %d",
+            date.toString(),
+            fasting,
+            breakfast,
+            lunch,
+            dinner)
     }
  }
 

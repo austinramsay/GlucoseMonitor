@@ -3,9 +3,11 @@ package edu.arizona.cast.austinramsay.glucosemonitor
 import android.graphics.Color
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.time.LocalDate
 
 class SharedViewModel : ViewModel() {
     val glucose = MutableLiveData<Glucose>()
+    var glucoseHistory: List<Glucose> = listOf()
     var fastingStatusColor: Int = Color.BLACK
     var breakfastStatusColor: Int = Color.BLACK
     var lunchStatusColor: Int = Color.BLACK
@@ -53,5 +55,32 @@ class SharedViewModel : ViewModel() {
 
         // Update the view model glucose (observers will catch this event)
         glucose.value = newGlucose
+    }
+
+    // TODO: Remove this function after testing
+    fun setRandomGlucose() {
+
+        val today: LocalDate = LocalDate.now()
+
+        // Begin creating objects at the 100th day prior to today
+        val begin: LocalDate = today.minusDays(100)
+
+        // Create a mutable list to hold our glucose objects
+        val glucoseList = mutableListOf<Glucose>()
+
+        // Create 100 random glucose objects offsetting the beginning date by the loop index
+        for (offset in 0..99) {
+            val randomGlucose = Glucose(
+                begin.plusDays(offset.toLong()),
+                Glucose.getRandomGlucoseLevel(),
+                Glucose.getRandomGlucoseLevel(),
+                Glucose.getRandomGlucoseLevel(),
+                Glucose.getRandomGlucoseLevel()
+            )
+
+            glucoseList.add(randomGlucose)
+        }
+
+        glucoseHistory = glucoseList
     }
 }

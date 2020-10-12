@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val inputFragment = InputFragment()
+        val historyFragment = HistoryFragment()
+
         outputView = findViewById(R.id.output_view)
         clearButton = findViewById(R.id.clear_button)
         historyButton = findViewById(R.id.history_button)
@@ -26,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         val model: SharedViewModel by viewModels()
 
         // View model 'glucose' observer event handler
+        // Whenever a glucose calculation is made, the info is stored in the view model. Update the UI
+        // according to it's values when it is made.
         model.glucose.observe(this, Observer<Glucose> { newGlucose ->
 
             if (newGlucose != null) {
@@ -42,11 +47,25 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        // History button event handler
+        historyButton.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, historyFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
         // Clear button event handler
         clearButton.setOnClickListener {
             model.updateGlucose(null)
-
             outputView.text = null
+        }
+
+        // Set the input fragment as the primary fragment that appears
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragment_container, inputFragment)
+            commit()
         }
     }
 }

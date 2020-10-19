@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GlucoseRepository.initialize(this)
         setContentView(R.layout.activity_main)
 
         val inputFragment = InputFragment()

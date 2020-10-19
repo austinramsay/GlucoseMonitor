@@ -1,6 +1,7 @@
 package edu.arizona.cast.austinramsay.glucosemonitor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,16 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
+private const val TAG = "edu.arizona.cast.austinramsay.glucosemonitor.HistoryFragment"
 
 class HistoryFragment : Fragment(R.layout.history_view) {
 
     private val model: SharedViewModel by activityViewModels()
+    private var adapter: GlucoseRViewAdapter? = GlucoseRViewAdapter(emptyList())
     private lateinit var rView: RecyclerView
     private lateinit var rViewAdapter: RecyclerView.Adapter<*>
     private lateinit var rViewManager: RecyclerView.LayoutManager
@@ -31,7 +36,7 @@ class HistoryFragment : Fragment(R.layout.history_view) {
 
         fun bind(glucose: Glucose) {
             this.glucose = glucose
-            dateView.text = this.glucose.date.toString()
+            dateView.text = this.glucose.date.toLocalDate().toString()
             avgView.text = this.glucose.average.toString()
             statusCheck.isChecked = if (this.glucose.fastingStatus != Glucose.STATUS_NORMAL) {
                 true
@@ -61,7 +66,7 @@ class HistoryFragment : Fragment(R.layout.history_view) {
 
             // When an item is clicked on, display a Toast with the Glucose details
             holder.itemView.setOnClickListener {
-                Toast.makeText(context, glucose.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, glucose.toString(), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -75,11 +80,11 @@ class HistoryFragment : Fragment(R.layout.history_view) {
         val view = layoutInflater.inflate(R.layout.history_view, container, false)
 
         // TODO: For hardcoded testing purposes only
-        model.setRandomGlucose()
-        val data = model.glucoseHistory
+        // model.setRandomGlucose()
+        // val data = model.glucoseHistory
 
         rViewManager = LinearLayoutManager(context)
-        rViewAdapter = GlucoseRViewAdapter(data)
+        rViewAdapter = GlucoseRViewAdapter(emptyList())
 
         rView = view.findViewById<RecyclerView>(R.id.history_recycler_view).apply {
             setHasFixedSize(true)
@@ -87,6 +92,18 @@ class HistoryFragment : Fragment(R.layout.history_view) {
             adapter = rViewAdapter
         }
 
+        model.glucoseListLiveData.observe(viewLifecycleOwner,
+                Observer { glucoseList ->
+                    glucoseList?.let {
+                        Log.i(TAG, "Got GlucoseList ${glucoseList.size}")
+                        updateUI(glucoseList)
+                    }
+                })
+
         return view
+    }
+
+    private fun updateUI(glucoseList: List<Glucose>) {
+        adapter = GlucoseRViewAdapter(glucoseList)
     }
 }

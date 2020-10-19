@@ -1,19 +1,24 @@
 package edu.arizona.cast.austinramsay.glucosemonitor
 
-import java.time.LocalDate
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.time.LocalDateTime
+import java.util.*
 
-data class Glucose(val date: LocalDate,
-                   val fasting: Int,
-                   val breakfast: Int,
-                   val lunch: Int,
-                   val dinner: Int) {
+@Entity
+data class Glucose(@PrimaryKey var id: UUID = UUID.randomUUID(),
+                   var date: LocalDateTime = LocalDateTime.now(),
+                   var fasting: Int = 0,
+                   var breakfast: Int = 0,
+                   var lunch: Int = 0,
+                   var dinner: Int = 0) {
 
-    val fastingStatus: String?
-    val breakfastStatus: String?
-    val lunchStatus: String?
-    val dinnerStatus: String?
-    val average: Int?
-    val overallStatus: String?
+    var fastingStatus: String?
+    var breakfastStatus: String?
+    var lunchStatus: String?
+    var dinnerStatus: String?
+    var average: Int?
+    var overallStatus: String?
 
     companion object {
         const val STATUS_NORMAL = "Normal"
@@ -64,14 +69,15 @@ data class Glucose(val date: LocalDate,
         }
 
         // Set the overall average values
-        average = ((fasting + breakfast + lunch + dinner) / 4)
-        overallStatus = if (average < 70) {
+        val testAverage = ((fasting + breakfast + lunch + dinner) / 4)
+        overallStatus = if (testAverage < 70) {
             STATUS_HYPOGLYCEMIC
-        } else if (average > 140) {
+        } else if (testAverage > 140) {
             STATUS_ABNORMAL
         } else {
             STATUS_NORMAL
         }
+        average = testAverage
     }
 
     override fun toString(): String {
@@ -81,7 +87,7 @@ data class Glucose(val date: LocalDate,
                 "Breakfast: %d\n" +
                 "Lunch: %d\n" +
                 "Dinner: %d",
-            date.toString(),
+            date.toLocalDate().toString(),
             fasting,
             breakfast,
             lunch,

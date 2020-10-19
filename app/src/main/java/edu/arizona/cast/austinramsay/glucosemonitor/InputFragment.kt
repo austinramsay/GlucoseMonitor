@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class InputFragment : Fragment(R.layout.input_view) {
 
@@ -70,10 +72,11 @@ class InputFragment : Fragment(R.layout.input_view) {
 
                 try {
 
-                    val currentDate = LocalDate.now()
+                    val currentDate = LocalDateTime.now()
 
                     // All input is verified, cast to ints and update the view model
                     val glucose = Glucose(
+                        UUID.randomUUID(),
                         currentDate,
                         fasting.toInt(),
                         breakfast.toInt(),
